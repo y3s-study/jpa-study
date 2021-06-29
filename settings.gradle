@@ -1,0 +1,3 @@
+rootProject.name = 'jpa-study'
+include 'jpa-start'
+
