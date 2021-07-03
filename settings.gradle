@@ -1,3 +1,4 @@
 rootProject.name = 'jpa-study'
 include 'jpa-start'
+include 'jpa-play'
 
