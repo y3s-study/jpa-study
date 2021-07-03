@@ -1,9 +1,7 @@
 package jpabook.start;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +14,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "MEMBER")
 @Setter
+@Getter
+@DynamicUpdate
 public class Member {
     @Id
     @Column(name = "ID")
