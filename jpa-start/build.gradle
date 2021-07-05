@@ -12,6 +12,7 @@ repositories {
 dependencies {
     implementation 'org.hibernate:hibernate-entitymanager:5.5.0.Final' // JPA, Hibernate
     implementation 'com.h2database:h2:1.4.199' // H2 Database
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
     implementation 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
