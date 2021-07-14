@@ -1,11 +1,12 @@
 package jpabook.start;
 
+import java.util.Date;
 import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
         JpaTemplate.run(em -> {
-            Member member = new Member("id1", "멤버", 2);
+            Member member = new Member("id1", "멤버", 2, RoleType.ADMIN, new Date());
             em.persist(member);
             System.out.println("member : " + member);
 
@@ -18,7 +19,7 @@ public class JpaMain {
                     .getResultList();
             System.out.println("members.size = " + members.size());
 
-            em.remove(member);
+//            em.remove(member);
         });
 
         JpaTemplate.close();

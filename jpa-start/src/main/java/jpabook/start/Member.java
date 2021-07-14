@@ -5,12 +5,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "MEMBER")
+@Table(name = "MEMBER", catalog = "test", schema = "public",
+        uniqueConstraints = @UniqueConstraint(
+                name = "name_age_unique",
+                columnNames = {"NAME", "AGE"})
+)
 @Setter
 @Getter
 @DynamicUpdate
@@ -20,10 +25,16 @@ public class Member {
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false, length = 10)
     private String username;
 
     private Integer age;
+
+    @Enumerated(value = EnumType.STRING)
+    private RoleType roleType;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
 
     @PrePersist
     public void prePersist() {
