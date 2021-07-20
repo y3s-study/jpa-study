@@ -4,6 +4,9 @@
         <class>jpabook.start.Member</class>
         <class>jpabook.id.BoardB</class>
         <class>jpabook.id.BoardC</class>
+        <class>jpabook.chapter5.Member</class>
+        <class>jpabook.chapter5.Team</class>
+
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
