@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class HelloShopMain {
     public static void main(String[] args) {
@@ -40,19 +39,25 @@ public class HelloShopMain {
         item.setStockQuantity(9999);
         em.persist(item);
 
-        Order order = new Order();
-        order.setMemberId(member.getId());
-        order.setOrderDateTime(LocalDateTime.now());
-        order.setOrderDate(new Date());
-        order.setStatus(OrderStatus.ORDER);
-        em.persist(order);
-
         OrderItem orderItem = new OrderItem();
-        orderItem.setOrderId(order.getId());
         orderItem.setCount(100);
         orderItem.setOrderPrice(item.getPrice());
-        orderItem.setItemId(item.getId());
+        orderItem.setItem(item);
+
+        Order order = new Order();
+        order.setMember(member);
+        order.addOrderItem(orderItem);
+        order.setOrderDate(LocalDateTime.now());
+        order.setStatus(OrderStatus.ORDER);
+        em.persist(order);
         em.persist(orderItem);
+
+        em.flush();
+        em.clear();
+
+        Order findOrder = em.find(Order.class, order.getId());
+        System.out.println("################## " + findOrder.getMember());
+        System.out.println("################## " + findOrder.getOrderItems().get(0));
     }
 
 
