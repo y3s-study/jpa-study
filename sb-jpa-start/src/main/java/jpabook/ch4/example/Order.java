@@ -1,4 +1,4 @@
-package jpabook.ch4;
+package jpabook.ch4.example;
 
 import java.util.Date;
 
