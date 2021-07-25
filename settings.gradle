@@ -1,6 +1,6 @@
 rootProject.name = 'jpa-study'
-include 'jpa-start'
-include 'jpa-play'
+include 'yj-jpa-start'
+include 'yj-spring-data-jpa'
 include 'sb-jpa-start'
 include 'sj'
 include 'yj-hello-shop'
