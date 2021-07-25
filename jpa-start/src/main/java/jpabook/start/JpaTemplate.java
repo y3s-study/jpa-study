@@ -2,13 +2,16 @@ package jpabook.start;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import java.util.function.Consumer;
 
 public class JpaTemplate {
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
+    private final EntityManagerFactory emf;
 
-    public static void run(Consumer<EntityManager> consumer) {
+    public JpaTemplate(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
+    public void run(Consumer<EntityManager> consumer) {
         EntityManager em = emf.createEntityManager();
 
         try {
@@ -21,9 +24,5 @@ public class JpaTemplate {
         } finally {
             em.close();
         }
-    }
-
-    public static void close() {
-        emf.close();
     }
 }

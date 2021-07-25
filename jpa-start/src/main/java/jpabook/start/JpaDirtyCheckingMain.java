@@ -1,8 +1,14 @@
 package jpabook.start;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 public class JpaDirtyCheckingMain {
     public static void main(String[] args) {
-        JpaTemplate.run(em -> {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
+        JpaTemplate jpaTemplate = new JpaTemplate(emf);
+
+        jpaTemplate.run(em -> {
             Member member = new Member();
             member.setId("100");
             member.setUsername("june");
@@ -19,6 +25,7 @@ public class JpaDirtyCheckingMain {
 
             em.remove(findMember);
         });
-        JpaTemplate.close();
+
+        emf.close();
     }
 }

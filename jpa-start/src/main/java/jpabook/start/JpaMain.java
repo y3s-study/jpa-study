@@ -1,11 +1,16 @@
 package jpabook.start;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.util.Date;
 import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
-        JpaTemplate.run(em -> {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpabook");
+        JpaTemplate jpaTemplate = new JpaTemplate(emf);
+
+        jpaTemplate.run(em -> {
             Member member = new Member("id1", "멤버", 2, RoleType.ADMIN, new Date());
             em.persist(member);
             System.out.println("member : " + member);
@@ -22,6 +27,6 @@ public class JpaMain {
 //            em.remove(member);
         });
 
-        JpaTemplate.close();
+        emf.close();
     }
 }
