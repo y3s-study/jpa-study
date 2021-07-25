@@ -30,6 +30,9 @@ public class RelationTest {
     void queryJoin() {
         testSave();
 
+        em.flush();
+        em.clear();
+
         String jpql = "select m from Ch5Member m join m.team t where t.name=:teamName";
 
         List<Member> resultList = em.createQuery(jpql, Member.class)
@@ -100,7 +103,7 @@ public class RelationTest {
 
     @AfterEach
     void tearDown() {
-        em.getTransaction().commit();
+        em.getTransaction().rollback();
         em.close();
     }
 

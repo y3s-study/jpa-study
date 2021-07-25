@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Entity(name = "Ch5Member")
 @Getter
@@ -28,7 +29,7 @@ public class Member {
         }
 
         this.team = team;
-        team.getMembers().add(this);
+        Optional.ofNullable(team).ifPresent(t -> t.getMembers().add(this));
     }
 
     public Member(String id, String username) {
