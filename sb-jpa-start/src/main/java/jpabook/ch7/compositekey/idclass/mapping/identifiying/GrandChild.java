@@ -1,5 +1,6 @@
 package jpabook.ch7.compositekey.idclass.mapping.identifiying;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -17,6 +18,10 @@ public class GrandChild {
 		@JoinColumn(name = "CHILD_ID")
 	})
 	private Child child;
+
+	@Id
+	@Column(name = "GRANDCHILD_ID")
+	private String id;
 
 	private String name;
 }
