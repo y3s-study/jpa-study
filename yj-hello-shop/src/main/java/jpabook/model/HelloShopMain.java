@@ -1,6 +1,7 @@
 package jpabook.model;
 
 import jpabook.model.entity.*;
+import jpabook.model.entity.item.Album;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,16 +34,21 @@ public class HelloShopMain {
         member.setZipcode("zzzz");
         em.persist(member);
 
-        Item item = new Item();
-        item.setName("Water");
-        item.setPrice(3000);
-        item.setStockQuantity(9999);
-        em.persist(item);
+        Album album = new Album();
+        album.setArtist("jason mraz");
+        album.setCreatedDate(LocalDateTime.now());
+        album.setLastModifiedDate(LocalDateTime.now());
+        album.setName("Mr a to z");
+        album.setStockQuantity(9999);
+        album.setPrice(30000);
+        album.setEtc("etc...");
+
+        em.persist(album);
 
         OrderItem orderItem = new OrderItem();
         orderItem.setCount(100);
-        orderItem.setOrderPrice(item.getPrice());
-        orderItem.setItem(item);
+        orderItem.setOrderPrice(album.getPrice());
+        orderItem.setItem(album);
 
         Order order = new Order();
         order.setMember(member);

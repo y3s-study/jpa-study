@@ -4,7 +4,12 @@
         <class>jpabook.model.entity.Member</class>
         <class>jpabook.model.entity.Order</class>
         <class>jpabook.model.entity.OrderItem</class>
-        <class>jpabook.model.entity.Item</class>
+        <class>jpabook.model.entity.item.Item</class>
+        <class>jpabook.model.entity.Delivery</class>
+        <class>jpabook.model.entity.Category</class>
+        <class>jpabook.model.entity.item.Album</class>
+        <class>jpabook.model.entity.item.Book</class>
+        <class>jpabook.model.entity.item.Movie</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
