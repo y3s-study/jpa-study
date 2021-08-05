@@ -1,17 +1,12 @@
-package jpabook.chapter7.join;
+package jpabook.chapter7.singletable;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import jpabook.chapter7.join.Item;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue(value = "A")
-@Getter
-@Setter
-@ToString
 public class Album extends Item {
     private String artist;
 }

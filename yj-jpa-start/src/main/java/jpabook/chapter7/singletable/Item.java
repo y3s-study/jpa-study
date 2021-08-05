@@ -1,17 +1,10 @@
-package jpabook.chapter7.join;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+package jpabook.chapter7.singletable;
 
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE")
-@Getter
-@Setter
-@ToString
 public abstract class Item {
     @Id
     @GeneratedValue
@@ -21,4 +14,3 @@ public abstract class Item {
     private String name;
     private int price;
 }
-

@@ -10,6 +10,8 @@
         <class>jpabook.chapter7.join.Album</class>
         <class>jpabook.chapter7.join.Movie</class>
         <class>jpabook.chapter7.join.Book</class>
+        <class>jpabook.chapter7.superclass.Member</class>
+        <class>jpabook.chapter7.superclass.Seller</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>

@@ -8,6 +8,10 @@
         <class>jpabook.chapter5.Team</class>
         <class>jpabook.manytoone.Employee</class>
         <class>jpabook.manytoone.Department</class>
+        <class>jpabook.chapter7.compositekey.Parent</class>
+        <class>jpabook.chapter7.embeddedid.Parent</class>
+        <class>jpabook.chapter7.join.Album</class>
+        <class>jpabook.chapter7.join.Item</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
