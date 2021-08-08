@@ -10,7 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class JpaTest {
-    static EntityManagerFactory emf;
+    protected static EntityManagerFactory emf;
     protected EntityManager em;
 
     @BeforeAll

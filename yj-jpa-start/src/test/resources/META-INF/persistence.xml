@@ -12,6 +12,8 @@
         <class>jpabook.chapter7.embeddedid.Parent</class>
         <class>jpabook.chapter7.join.Album</class>
         <class>jpabook.chapter7.join.Item</class>
+        <class>jpabook.chapter8.Team</class>
+        <class>jpabook.chapter8.Member</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
