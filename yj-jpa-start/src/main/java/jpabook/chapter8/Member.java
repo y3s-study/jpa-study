@@ -2,10 +2,8 @@ package jpabook.chapter8;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "Member8")
 @Data
@@ -15,7 +13,10 @@ public class Member {
     private Long id;
     private String username;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    private List<Order> orders;
 
 }

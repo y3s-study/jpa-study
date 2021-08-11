@@ -14,6 +14,7 @@
         <class>jpabook.chapter7.join.Item</class>
         <class>jpabook.chapter8.Team</class>
         <class>jpabook.chapter8.Member</class>
+        <class>jpabook.chapter8.Order</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
