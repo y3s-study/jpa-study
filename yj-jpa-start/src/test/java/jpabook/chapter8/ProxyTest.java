@@ -19,7 +19,7 @@ public class ProxyTest extends JpaTest {
         em.flush();
         em.clear();
 
-        Team proxyTeam = em.getReference(Team.class, team.getId());
+        Team proxyTeam = em.getReference(Team.class, team.getPk());
         System.out.println("entity class : " + proxyTeam.getClass().getName());
 
         assertFalse(emf.getPersistenceUnitUtil().isLoaded(proxyTeam));
@@ -34,7 +34,7 @@ public class ProxyTest extends JpaTest {
 
         em.persist(team);
 
-        Team proxyTeam = em.getReference(Team.class, team.getId());
+        Team proxyTeam = em.getReference(Team.class, team.getPk());
         System.out.println("team name : " + proxyTeam.getName());
     }
 
@@ -48,7 +48,7 @@ public class ProxyTest extends JpaTest {
         em.flush();
         em.clear();
 
-        Team proxyTeam = em.getReference(Team.class, team.getId());
+        Team proxyTeam = em.getReference(Team.class, team.getPk());
         em.detach(proxyTeam);
 
         assertThrows(LazyInitializationException.class, () -> {
@@ -66,10 +66,10 @@ public class ProxyTest extends JpaTest {
         em.flush();
         em.clear();
 
-        Team proxyTeam = em.getReference(Team.class, team.getId());
+        Team proxyTeam = em.getReference(Team.class, team.getPk());
 
         assertFalse(emf.getPersistenceUnitUtil().isLoaded(proxyTeam));
-        System.out.println("proxy id = " + proxyTeam.getId());
+        System.out.println("proxy id = " + proxyTeam.getPk());
         assertFalse(emf.getPersistenceUnitUtil().isLoaded(proxyTeam));
         Hibernate.initialize(proxyTeam);
         assertTrue(Hibernate.isInitialized(proxyTeam));
@@ -103,20 +103,36 @@ public class ProxyTest extends JpaTest {
         member.setUsername("new member");
         em.persist(member);
 
-        Order order = new Order();
-        order.setMember(member);
-        em.persist(order);
+        Order order1 = new Order();
+        order1.setMember(member);
+        order1.setJun("11111");
+        em.persist(order1);
+
+        Order order2 = new Order();
+        order2.setMember(member);
+        order2.setJun("322322");
+        em.persist(order2);
+
 
         em.flush();
+        em.detach(order1);
+        em.detach(order2);
+        em.detach(member);
         em.clear();
 
+
         Member findMember = em.find(Member.class, member.getId());
+        System.out.println("---------------------------------------");
         assertFalse(Hibernate.isInitialized(findMember.getOrders()));
 
+        System.out.println("222222222");
         System.out.println("orders class name : " + findMember.getOrders().getClass().getName());
+        System.out.println("222222222");
         assertFalse(Hibernate.isInitialized(findMember.getOrders()));
 
+        System.out.println("33333333");
         System.out.println("orders.get(0) : " + findMember.getOrders().get(0));
+        System.out.println("33333333");
         assertTrue(Hibernate.isInitialized(findMember.getOrders()));
     }
 }

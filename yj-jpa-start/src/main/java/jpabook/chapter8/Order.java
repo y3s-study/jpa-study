@@ -13,6 +13,7 @@ public class Order {
     @Id
     @GeneratedValue
     private Long id;
+    private String jun;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")

@@ -16,7 +16,7 @@ public class Member {
     @ManyToOne(fetch = FetchType.LAZY)
     private Team team;
 
-    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Order> orders;
 
 }
