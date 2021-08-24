@@ -15,6 +15,7 @@
         <class>jpabook.chapter8.Team</class>
         <class>jpabook.chapter8.Member</class>
         <class>jpabook.chapter8.Order</class>
+        <class>jpabook.chapter9.Member</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
@@ -24,8 +25,8 @@
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
 
             <property name="hibernate.show_sql" value="false"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.format_sql" value="false"/>
+            <property name="hibernate.use_sql_comments" value="false"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
