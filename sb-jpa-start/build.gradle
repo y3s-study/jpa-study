@@ -1,3 +1,9 @@
+buildscript {
+    ext {
+        queryDslVersion = "4.4.0"
+    }
+}
+
 plugins {
     id 'java'
 }
@@ -11,8 +17,16 @@ repositories {
 dependencies {
     implementation 'org.hibernate:hibernate-entitymanager:5.5.3.Final'
     implementation 'com.h2database:h2:1.4.199'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    // QueryDSL
+    implementation ("com.querydsl:querydsl-jpa:${queryDslVersion}")
+    annotationProcessor ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+    testImplementation ("com.querydsl:querydsl-jpa:${queryDslVersion}")
+    testAnnotationProcessor ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
 }
 
 test {
