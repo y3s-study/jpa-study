@@ -16,6 +16,7 @@
         <class>jpabook.chapter8.Member</class>
         <class>jpabook.chapter8.Order</class>
         <class>jpabook.chapter9.Member</class>
+        <class>jpabook.chapter9.AddressEntity</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
