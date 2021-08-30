@@ -4,8 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -20,6 +24,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import jpabook.JpaTest;
+import jpabook.ch6.manytomany.connectentity.primarykey.Product;
 
 class JpqlTest extends JpaTest {
 
@@ -94,5 +99,102 @@ class JpqlTest extends JpaTest {
 		session.doWork(connection -> {
 			//;
 		});
+	}
+
+	@Test
+	void typeQuery() {
+		TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m", Member.class);
+
+		List<Member> resultList = query.getResultList();
+		for (Member m : resultList) {
+			System.out.println("member = " + m);
+		}
+	}
+
+	@Test
+	void query() {
+		Query query = em.createQuery("SELECT m.username, m.age from Member m");
+		List resultList = query.getResultList();
+		for (Object o :
+			resultList) {
+			Object[] result = (Object[])o;
+			System.out.println("username = " + result[0]);
+			System.out.println("age = " + result[1]);
+		}
+	}
+
+	@Test
+	void named_parameters() {
+		String usernameParam = "User1";
+
+		TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m where m.username = :username", Member.class);
+
+		query.setParameter("username", usernameParam);
+		List<Member> resultList = query.getResultList();
+	}
+
+	@Test
+	void positional_parameters() {
+		String usernameParam = "User1";
+
+		List<Member> members = em.createQuery("SELECT m FROM Member m where m.username = ?1", Member.class)
+			.setParameter(1, usernameParam)
+			.getResultList();
+	}
+
+	@Test
+	void projection() {
+		Query query = em.createQuery("SELECT m.username, m.age, FROM Member m");
+		List resultList = query.getResultList();
+
+		Iterator iterator = resultList.iterator();
+		while (iterator.hasNext()) {
+			Object[] row = (Object[])iterator.next();
+			String username = (String)row[0];
+			Integer age = (Integer)row[1];
+		}
+	}
+
+	@Test
+	void projection_by_object_array() {
+		List<Object[]> resultList = em.createQuery("SELECT m.username, m.age FROM Member m")
+			.getResultList();
+
+		for (Object[] row : resultList) {
+			String username = (String)row[0];
+			Integer age = (Integer)row[1];
+		}
+	}
+
+	@Test
+	void projection_by_entity() {
+		List<Object[]> resultList = em.createQuery("SELECT o.member, o.product, o.orderAmount FROM Order o")
+			.getResultList();
+
+		for (Object[] row : resultList) {
+			Member member = (Member)row[0];
+			Product product = (Product)row[1];
+			Integer orderAmount = (Integer)row[2];
+		}
+	}
+
+	@Test
+	void new_명령어_사용전() {
+		List<Object[]> resultList = em.createQuery("SELECT m.username, m.age FROM Member m")
+			.getResultList();
+
+		List<UserDto> userDtos = new ArrayList<>();
+		for(Object[] row : resultList) {
+			UserDto userDto = new UserDto((String)row[0], (Integer)row[1]);
+			userDtos.add(userDto);
+		}
+	}
+
+	@Test
+	void new_명령어_사용후() {
+		TypedQuery<UserDto> query = em.createQuery(
+			"SELECT new jpabook.ch10.jpql.UserDto(m.username, m.age) FROM Member m", UserDto.class);
+
+		List<UserDto> resultList = query.getResultList();
 	}
 }
