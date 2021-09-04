@@ -10,15 +10,20 @@ repositories {
 }
 
 ext {
+    jpaVersion = '2.2'
     hibernateVersion = '5.5.7.Final'
     h2Version = 'h2:1.4.200'
     logbackVersion = '1.2.5'
     lombokVersion = '1.18.20'
     jupiterVersion = '5.7.2'
+    querydslVersion = '5.0.0'
 }
 
 dependencies {
     implementation "org.hibernate:hibernate-entitymanager:${hibernateVersion}" // JPA, Hibernate
+    implementation "com.querydsl:querydsl-jpa:${querydslVersion}"
+    annotationProcessor "com.querydsl:querydsl-apt:${querydslVersion}:jpa"
+    annotationProcessor "javax.persistence:javax.persistence-api:${jpaVersion}"
     implementation "com.h2database:${h2Version}" // H2 Database
     implementation "ch.qos.logback:logback-classic:${logbackVersion}"
     implementation "org.projectlombok:lombok:${lombokVersion}"
