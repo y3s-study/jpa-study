@@ -4,6 +4,7 @@
         <class>jpabook.jpql.Member</class>
         <class>jpabook.jpql.Team</class>
         <class>jpabook.jpql.Order</class>
+        <class>jpabook.jpql.Item</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>

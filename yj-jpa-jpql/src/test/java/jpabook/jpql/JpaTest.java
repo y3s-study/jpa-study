@@ -19,7 +19,7 @@ public class JpaTest {
     }
 
     @BeforeEach
-    void beforeEach() {
+    protected void beforeEach() {
         em = emf.createEntityManager();
         em.getTransaction().begin();
     }
