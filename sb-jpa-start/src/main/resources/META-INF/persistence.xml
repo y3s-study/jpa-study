@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.2">
     <persistence-unit name="jpabook">
+        <mapping-file>META-INF/ormMember.xml</mapping-file>
 <!--        <class>jpabook.ch9.embedded.association.Member</class>-->
         <class>jpabook.ch9.embedded.association.PhoneServiceProvider</class>
 <!--        <class>jpabook.ch9.embedded.collection.Member</class>-->
         <class>jpabook.ch10.jpql.Member</class>
+        <class>jpabook.ch10.jpql.Team</class>
+        <class>jpabook.ch10.jpql.Order</class>
+        <class>jpabook.ch10.querydsl.Item</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
@@ -19,7 +23,5 @@
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.id.new_generator_mappings" value="true"/>
         </properties>
-
-        <mapping-file>META-INF/ormMember.xml</mapping-file>
     </persistence-unit>
 </persistence>
