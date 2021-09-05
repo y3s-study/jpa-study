@@ -19,5 +19,7 @@
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.id.new_generator_mappings" value="true"/>
         </properties>
+
+        <mapping-file>META-INF/ormMember.xml</mapping-file>
     </persistence-unit>
 </persistence>

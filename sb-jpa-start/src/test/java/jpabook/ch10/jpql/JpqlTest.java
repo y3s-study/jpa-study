@@ -184,7 +184,7 @@ class JpqlTest extends JpaTest {
 			.getResultList();
 
 		List<UserDto> userDtos = new ArrayList<>();
-		for(Object[] row : resultList) {
+		for (Object[] row : resultList) {
 			UserDto userDto = new UserDto((String)row[0], (Integer)row[1]);
 			userDtos.add(userDto);
 		}
@@ -197,4 +197,95 @@ class JpqlTest extends JpaTest {
 
 		List<UserDto> resultList = query.getResultList();
 	}
+
+	@Test
+	void 페이징_사용() {
+		TypedQuery<Member> query = em.createQuery("SELECT m FROM Member m ORDER BY m.username DESC",
+			Member.class);
+
+		query.setFirstResult(10);
+		query.setMaxResults(20);
+		query.getResultList();
+	}
+
+	@Test
+	void 내부조인() {
+		String teamName = "팀A";
+		String query = "SELECT m FROM Member m INNER JOIN m.team t "
+			+ "WHERE t.name = :teamName";
+
+		List<Member> members = em.createQuery(query, Member.class)
+			.setParameter("teamName", teamName)
+			.getResultList();
+	}
+
+	@Test
+	void 페치조인() {
+		String jpql = "select m from Member m join fetch m.team";
+
+		List<Member> members = em.createQuery(jpql, Member.class)
+			.getResultList();
+
+		for (Member member : members) {
+			// 페치 조인으로 회원과 팀을 함께 조회해서 지연로딩 발생 안함
+			System.out.println("username = " + member.getUsername() + ", " +
+				"teamname = " + member.getTeam().getName());
+		}
+	}
+
+	@Test
+	void 컬렉션_페치조인() {
+		String jpql = "select t from Team t join fetch t.members where t.name = '팀A'";
+		List<Team> teams = em.createQuery(jpql, Team.class).getResultList();
+
+		for (Team team : teams) {
+			System.out.println("teamname = " + team.getName() + ", team = " + team);
+			for (Member member : team.getMembers()) {
+				System.out.println("->username = " + member.getUsername() + ", member = " + member);
+			}
+		}
+	}
+
+	@Test
+	void 엔티티를_파라미터로_직접_받는_코드() {
+
+		String qlString = "select m from Member m where m = :member";
+		List resultList = em.createQuery(qlString)
+			.setParameter("member", Member.class)
+			.getResultList();
+	}
+
+	@Test
+	void 식별자_값을_직접_사용하는_코드() {
+
+		String qlString = "select m from Member m where m.id = :memberId";
+		List resultList = em.createQuery(qlString)
+			.setParameter("memberId", 4L)
+			.getResultList();
+	}
+
+	@Test
+	void 외래키_대신에_엔티티를_직접_사용하는_코드() {
+		Team team = em.find(Team.class, 1L);
+		String qlString = "select m from Member m where m.team = :team";
+		List resultList = em.createQuery(qlString)
+			.setParameter("team", Team.class)
+			.getResultList();
+	}
+
+	@Test
+	void 외래키_식별자를_직접_사용하는_코드() {
+		String qlString = "select m from Member m where m.team.id = :teamId";
+		List resultList = em.createQuery(qlString)
+			.setParameter("teamId", 1L)
+			.getResultList();
+	}
+
+	@Test
+	void named_query_사용() {
+		List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+			.setParameter("username", "회원1")
+			.getResultList();
+	}
+
 }
