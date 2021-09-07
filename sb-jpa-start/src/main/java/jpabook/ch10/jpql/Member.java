@@ -31,7 +31,7 @@ public class Member {
 	@ManyToOne
 	private Team team;
 
-	@OneToMany
+	@OneToMany(mappedBy = "member")
 	private List<Order> orders;
 
 	public static Member create(String username, Integer age) {

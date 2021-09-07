@@ -9,6 +9,7 @@
         <class>jpabook.ch10.jpql.Team</class>
         <class>jpabook.ch10.jpql.Order</class>
         <class>jpabook.ch10.querydsl.Item</class>
+        <class>jpabook.ch10.querydsl.OrderItem</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>

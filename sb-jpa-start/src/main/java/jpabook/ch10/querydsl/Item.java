@@ -1,27 +1,22 @@
-package jpabook.ch10.jpql;
-
-import java.util.List;
+package jpabook.ch10.querydsl;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 @Entity
-public class Team {
-
+public class Item {
 	@Id
 	@GeneratedValue
 	private Long id;
 
 	private String name;
 
-	@OneToMany
-	private List<Member> members;
+	private Integer price;
+
+	private Integer stockQuantity;
 }
