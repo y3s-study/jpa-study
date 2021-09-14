@@ -10,4 +10,26 @@
     <named-query name="Member.count">
         <query>select count(m) from Member m</query>
     </named-query>
+    <named-native-query name="Member.memberWithOrderCount.xml"
+                        result-set-mapping="memberWithOrderCountResultMap">
+        <query><![CDATA[
+        SELECT M.ID, AGE, NAME, TEAM_ID, I.ORDER_COUNT
+        FROM MEMBER M
+        LEFT JOIN
+            (SELECT IM>ID, COUNT(*) AS ORDER_COUNT
+            FROM ORDERS O, MEMBER IM
+            WHERE O.MEMBER_ID = IM.ID)
+        ON M.ID = I.ID
+        ]]></query>
+    </named-native-query>
+
+    <named-stored-procedure-query name="multiply" procedure-name="proc_multiply">
+        <parameter name="inParam" mode="IN" class="java.lang.Integer" />
+        <parameter name="outParam" mode="OUT" class="java.lang.Integer" />
+    </named-stored-procedure-query>
+
+    <sql-result-set-mapping name="memberWithOrderCountResultMap">
+        <entity-result entity-class="jpabook.ch10.jpql.Member" />
+        <column-result name="ORDER_COUNT" />
+    </sql-result-set-mapping>
 </entity-mappings>
