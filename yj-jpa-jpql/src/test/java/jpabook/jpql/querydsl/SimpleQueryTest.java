@@ -1,10 +1,15 @@
 package jpabook.jpql.querydsl;
 
 import com.querydsl.core.NonUniqueResultException;
+import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import jpabook.jpql.Item;
 import jpabook.jpql.QItem;
+import jpabook.jpql.dto.MemberDto;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static jpabook.jpql.QItem.item;
 import static jpabook.jpql.QMember.member;
@@ -122,5 +127,53 @@ public class SimpleQueryTest extends QuerydslTest {
                         JPAExpressions.selectFrom(itemSub).where(item.name.eq(itemSub.name))
                 ))
                 .fetch();
+    }
+
+    @Test
+    void singleValueProjectionTest() {
+        List<String> usernames = jpaQueryFactory.select(member.username)
+                .from(member)
+                .fetch();
+    }
+
+    @Test
+    void multiProjectionTest() {
+        List<Tuple> results = jpaQueryFactory
+                .select(member.username, member.age)
+                .from(member)
+                .fetch();
+
+        for (Tuple tuple : results) {
+            System.out.println("username = " + tuple.get(member.username));
+            System.out.println("age = " + tuple.get(member.age));
+        }
+    }
+
+    @Test
+    void beanProjection() {
+        List<MemberDto> memberDtos = jpaQueryFactory
+                .select(Projections.bean(MemberDto.class, member.username, member.age))
+                .from(member)
+                .fetch();
+    }
+
+    @Test
+    void batchUpdate() {
+        jpaQueryFactory
+                .update(member)
+                .set(member.username, "useruser")
+                .set(member.age, member.age.add(10))
+                .execute();
+    }
+
+    @Test
+    void batchDelete() {
+        jpaQueryFactory.delete(member)
+                .where(member.username.eq("name"))
+                .execute();
+
+        jpaQueryFactory.insert(member)
+                .set(member.age, 10)
+                .execute();
     }
 }
