@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @ToString
+@NamedQuery(name="Member.findByName", query = "select m from Member m where m.name =: name")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +19,8 @@ public class Member {
 
     @Column(name = "name")
     private String name;
+
+    private int age;
 
     public Member(String name) {
         this.name = name;
