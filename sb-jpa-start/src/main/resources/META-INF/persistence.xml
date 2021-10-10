@@ -5,11 +5,15 @@
 <!--        <class>jpabook.ch9.embedded.association.Member</class>-->
         <class>jpabook.ch9.embedded.association.PhoneServiceProvider</class>
 <!--        <class>jpabook.ch9.embedded.collection.Member</class>-->
-        <class>jpabook.ch10.jpql.Member</class>
-        <class>jpabook.ch10.jpql.Team</class>
-        <class>jpabook.ch10.jpql.Order</class>
-        <class>jpabook.ch10.querydsl.Item</class>
-        <class>jpabook.ch10.querydsl.OrderItem</class>
+<!--        <class>jpabook.ch10.jpql.Member</class>-->
+<!--        <class>jpabook.ch10.jpql.Team</class>-->
+<!--        <class>jpabook.ch10.jpql.Order</class>-->
+<!--        <class>jpabook.ch10.querydsl.Item</class>-->
+<!--        <class>jpabook.ch10.querydsl.OrderItem</class>-->
+        <class>jpabook.ch14.collection.Team</class>
+        <class>jpabook.ch14.collection.Member</class>
+        <class>jpabook.ch14.list.Board</class>
+        <class>jpabook.ch14.list.Comment</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
