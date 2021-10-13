@@ -11,8 +11,6 @@ import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
-import jpabook.ch14.collection.Member;
-
 @NamedEntityGraph(name = "Order.withMember", attributeNodes = {
 	@NamedAttributeNode("member")
 })
