@@ -17,6 +17,7 @@
         <class>jpabook.ch14.orderby.Team</class>
         <class>jpabook.ch14.orderby.Member</class>
         <class>jpabook.ch14.listener.Duck</class>
+        <class>jpabook.ch14.entitygraph.Order</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
