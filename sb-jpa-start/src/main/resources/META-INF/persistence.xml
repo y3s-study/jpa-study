@@ -17,8 +17,11 @@
 <!--        <class>jpabook.ch14.orderby.Team</class>-->
 <!--        <class>jpabook.ch14.orderby.Member</class>-->
         <class>jpabook.ch14.listener.Duck</class>
-        <class>jpabook.ch14.entitygraph.Order</class>
+<!--        <class>jpabook.ch14.entitygraph.Order</class>-->
         <class>jpabook.ch14.entitygraph.Member</class>
+        <class>jpabook.ch14.subgraph.Order</class>
+        <class>jpabook.ch14.subgraph.OrderItem</class>
+        <class>jpabook.ch14.subgraph.Item</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
