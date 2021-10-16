@@ -6,3 +6,5 @@ include 'sj'
 include 'yj-hello-shop'
 include 'yj-jpa-jpql'
 include 'sk-hello-shop'
+include 'sb-spring-data-jpa'
+
