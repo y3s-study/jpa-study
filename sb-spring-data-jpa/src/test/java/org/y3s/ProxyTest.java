@@ -167,4 +167,22 @@ public class ProxyTest {
 
 		return (T)entity;
 	}
+
+	@Test
+	public void 프록시_인터페이스_제공_사용() {
+		Book book = new Book();
+		book.setName("jpabook");
+		book.setAuthor("kim");
+		em.persist(book);
+
+		OrderItem saveOrderItem = new OrderItem();
+		saveOrderItem.setItem(book);
+		em.persist(saveOrderItem);
+
+		em.flush();
+		em.clear();
+
+		OrderItem orderItem = em.find(OrderItem.class, saveOrderItem.getId());
+		orderItem.printItem();
+	}
 }

@@ -13,7 +13,7 @@ import lombok.Getter;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn
-public abstract class Item {
+public abstract class Item implements TitleView {
 	@Id
 	@GeneratedValue
 	private Long id;

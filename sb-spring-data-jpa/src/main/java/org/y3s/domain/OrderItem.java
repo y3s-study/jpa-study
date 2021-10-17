@@ -27,4 +27,8 @@ public class OrderItem {
 	public void setItem(Item item) {
 		this.item = item;
 	}
+
+	public void printItem() {
+		System.out.println("Title = " + item.getTitle());
+	}
 }
