@@ -28,7 +28,7 @@ public class OrderItem {
 		this.item = item;
 	}
 
-	public void printItem() {
-		System.out.println("Title = " + item.getTitle());
-	}
+	// public void printItem() {
+	// 	System.out.println("Title = " + item.getTitle());
+	// }
 }

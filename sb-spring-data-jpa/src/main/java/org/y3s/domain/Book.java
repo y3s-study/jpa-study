@@ -3,6 +3,8 @@ package org.y3s.domain;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import org.y3s.domain.visitor.Visitor;
+
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -11,6 +13,11 @@ import lombok.NoArgsConstructor;
 public class Book extends Item {
 	private String name;
 	private String author;
+
+	@Override
+	public void accept(Visitor visitor) {
+		visitor.visit(this);
+	}
 
 	public String getName() {
 		return name;
@@ -26,10 +33,5 @@ public class Book extends Item {
 
 	public void setAuthor(String author) {
 		this.author = author;
-	}
-
-	@Override
-	public String getTitle() {
-		return "[제목:" + getName() + " 저자:" + author + "]";
 	}
 }

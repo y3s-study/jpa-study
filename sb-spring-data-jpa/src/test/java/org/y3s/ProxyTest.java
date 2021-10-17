@@ -15,6 +15,8 @@ import org.y3s.domain.Book;
 import org.y3s.domain.Item;
 import org.y3s.domain.Member;
 import org.y3s.domain.OrderItem;
+import org.y3s.domain.visitor.PrintVisitor;
+import org.y3s.domain.visitor.TitleVisitor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -168,8 +170,26 @@ public class ProxyTest {
 		return (T)entity;
 	}
 
+	// @Test
+	// public void 프록시_인터페이스_제공_사용() {
+	// 	Book book = new Book();
+	// 	book.setName("jpabook");
+	// 	book.setAuthor("kim");
+	// 	em.persist(book);
+	//
+	// 	OrderItem saveOrderItem = new OrderItem();
+	// 	saveOrderItem.setItem(book);
+	// 	em.persist(saveOrderItem);
+	//
+	// 	em.flush();
+	// 	em.clear();
+	//
+	// 	OrderItem orderItem = em.find(OrderItem.class, saveOrderItem.getId());
+	// 	orderItem.printItem();
+	// }
+
 	@Test
-	public void 프록시_인터페이스_제공_사용() {
+	public void 상속관계와_프록시_VisitorPattern() {
 		Book book = new Book();
 		book.setName("jpabook");
 		book.setAuthor("kim");
@@ -183,6 +203,34 @@ public class ProxyTest {
 		em.clear();
 
 		OrderItem orderItem = em.find(OrderItem.class, saveOrderItem.getId());
-		orderItem.printItem();
+		Item item = orderItem.getItem();
+
+		//PrintVisitor
+		item.accept(new PrintVisitor());
+	}
+
+	@Test
+	public void TitleVisitor_사용() {
+		Book book = new Book();
+		book.setName("jpabook");
+		book.setAuthor("kim");
+		em.persist(book);
+
+		OrderItem saveOrderItem = new OrderItem();
+		saveOrderItem.setItem(book);
+		em.persist(saveOrderItem);
+
+		em.flush();
+		em.clear();
+
+		OrderItem orderItem = em.find(OrderItem.class, saveOrderItem.getId());
+		Item item = orderItem.getItem();
+
+		//TitleVisitor
+		TitleVisitor titleVisitor = new TitleVisitor();
+		item.accept(titleVisitor);
+
+		String title = titleVisitor.getTitle();
+		System.out.println("title = " + title);
 	}
 }
