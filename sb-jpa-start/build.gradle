@@ -24,7 +24,10 @@ dependencies {
 
     // QueryDSL
     implementation ("com.querydsl:querydsl-jpa:${queryDslVersion}")
+    implementation ("com.querydsl:querydsl-core:${queryDslVersion}")
     annotationProcessor ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
+    implementation ("javax.annotation:javax.annotation-api:1.3.2")
+    annotationProcessor ("javax.annotation:javax.annotation-api:1.3.2")
     testImplementation ("com.querydsl:querydsl-jpa:${queryDslVersion}")
     testAnnotationProcessor ("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
 }

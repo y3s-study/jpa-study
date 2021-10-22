@@ -9,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 public class Member {
@@ -18,7 +19,7 @@ public class Member {
 	@GeneratedValue
 	private Long id;
 
-	@BatchSize(size = 5)
+	@Fetch(FetchMode.SUBSELECT)
 	@OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
 	private List<Order> orders = new ArrayList<>();
 }
