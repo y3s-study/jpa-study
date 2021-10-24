@@ -1,5 +1,8 @@
 package jpabook.ch16;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.EntityTransaction;
 import javax.persistence.LockModeType;
 
@@ -38,6 +41,14 @@ public class LockTest extends JpaTest {
 
 		//트랜잭션1 커밋 시점에 버전 강제 증가
 		tx.commit();
+	}
 
+	void PESSIMISTIC_LOCK_TIMEOUT() {
+		Map<String, Object> properties = new HashMap<>();
+
+		//타임아웃 10초까지 대기설정
+		properties.put("javax.persistence.lock.timeout", 10000);
+
+		em.find(Board.class, 1L, LockModeType.PESSIMISTIC_WRITE, properties);
 	}
 }
